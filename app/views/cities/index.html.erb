@@ -1,0 +1,5 @@
+<h2>Listing Cities </h2>
+<lab><% @cities.each do |city| %></lab>
+<%= city.name %>
+<% end %>
+<%= link_to 'New Cities', new_city_path %>
