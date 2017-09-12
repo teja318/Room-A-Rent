@@ -5,11 +5,11 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :authentication_keys => [:username]
 
-      before_create :assign_role
+      # before_create :assign_role
 
 
-      private
-      def assign_role
-      	self.role = role.last
-       end
+      # private
+      # def assign_role
+      # 	self.role_id = role.last
+      #  end
 end

@@ -3,9 +3,11 @@ Rails.application.routes.draw do
 
   resources :cities
   resources :roles
+  resources :amenities
+
 
   devise_for :users
-   #root  'welcome#index'
+   root  'cities#index'
     # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -1,0 +1,9 @@
+<h2>Listing Amenities </h2>
+
+
+<lab><% @amenities.each do |amenity| %></lab>
+<%= amenity.name %><br>
+<%= amenity.description %><br>
+<% end %>
+
+<%= link_to 'New Amenities', new_amenity_path %>

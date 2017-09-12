@@ -1,0 +1,8 @@
+<h2>Listing Roles </h2>
+
+
+<lab><% @roles.each do |role| %></lab>
+<%= role.name %><br>
+<% end %>
+
+<%= link_to 'New Roles', new_role_path %>
