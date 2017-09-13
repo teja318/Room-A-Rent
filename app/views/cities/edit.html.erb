@@ -1,5 +1,5 @@
 <h2> Add Cities </h2>
-<lis><%= form_for @city do |f| %></lis>
+<lab><%= form_for @city do |f| %></lab>
 <% if @city.errors.any? %>
 	<h3> these are  the errors prohibitted from the begin saved : </h3>
     <ul>
@@ -8,8 +8,9 @@
     <% end %>
     </ul>
     <% end %>
-<label>Name: </label>
+
+   <label>Name: </label>
 	<%= f.text_field :name %> </br>
-	<%= f.submit %>
+	<%= f.submit %> or <%= link_to "back", cities_path %>
 	<% end %>
 

@@ -1,0 +1,46 @@
+<h2>Listing Rooms </h2>
+<table border=1>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th> 
+      <th>Price</th>
+      <th>Rules</th>
+      <th>Address</th>
+      <th>Images</th>
+      <th>Latitude</th>
+      <th>Longitude</th>
+      <th>city_id</th>
+      <th>user_id</th>
+      
+    </tr>
+  </thead>
+
+  <tbody>
+        <% @rooms.each do |room| %>
+      <tr>
+        <td><%= room.name %></td>
+        <td><%= room.description %></td>
+        <td><%= room.price %></td>
+        <td><%= room.rules %></td>
+        <td><%= room.address %></td>
+        <td> <%= room.images %></td>
+        <td> <%= room.latitude %></td>
+         <td> <%= room.longitude %></td>
+          <td><%= room.city_id %></td>
+           <td><%= room.user_id %></td>
+        
+       
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+
+
+
+
+<%# if can? :create, Room.new %>
+<%= link_to 'New Room', new_room_path %>
+<%# end %>

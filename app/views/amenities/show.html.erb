@@ -5,4 +5,11 @@
 <p>Description - <%= @amenity.description %></p>
 
 
+<% if can? :update, @amenity %> 
+<%= link_to "Edit", edit_amenity_path(@amenity.id) %>
+<% end %>
+<%if can? :destroy, @amenity %> 
+<%= link_to "destroy", amenity_path(@amenity.id), method: :delete, data: {confirm: "Are you sure?"} %>
+<% end %>
+
 <%= link_to "lisiting Cities", amenities_path %>

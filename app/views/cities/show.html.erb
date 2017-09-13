@@ -1,2 +1,8 @@
 <h2><%= @city.name %></h2>
+<% if can? :update, @city %> 
+<%= link_to "Edit", edit_city_path(@city.id) %>
+<% end %>
+<%if can? :destroy, @city %> 
+<%= link_to "destroy", city_path(@city.id), method: :delete, data: {confirm: "Are you sure?"} %>
+<% end %>
 <%= link_to "lisiting Cities", cities_path %>
