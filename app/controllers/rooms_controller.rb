@@ -44,6 +44,6 @@ end
 
 private
 def room_params
-params[:room].permit(:name, :description, :price, :rules, :address, :images, :latitude, :longitude, :city_id)
+params[:room].permit(:name, :description, :price, :rules, :address, :images,  :city_id, amenity_ids:[])
 end	
 end

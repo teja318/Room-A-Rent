@@ -1,8 +1,10 @@
 class Room < ActiveRecord::Base
+ mount_uploader :images, CoverUploader
+
 belongs_to :user
 belongs_to :city
-has_many :amentiy_rooms
-has_many :amenities, through: :amentiy_rooms
+has_many :amenity_rooms
+has_many :amenities, through: :amenity_rooms
 
   validates_presence_of :name, :description, :price, :address, :rules,:city_id, :user_id
    validates_length_of :description, within: (1..150)

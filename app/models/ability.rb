@@ -9,7 +9,7 @@ class Ability
         can :read, [City, Amenity, Room]
 
     elsif user.role? "guest"
-        can :read, [City]
+        can :read, [City, Amenity]
     
     end
     end    

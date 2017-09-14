@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   devise_for :users
-
+  resources :bookings
   resources :cities
   resources :roles
   resources :amenities

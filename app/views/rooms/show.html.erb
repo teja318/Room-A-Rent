@@ -4,9 +4,16 @@
 <%= @room.price%><br>
 <%= @room.rules %><br>
 <%= @room.address %><br>
-<%= @room.images %><br>
+<%= image_tag(@room.images.url) %></br>
 <%= @room.latitude %></br>
 <%= @room.longitude %></br>
 <%= @room.city_id %></br>
 <%= @room.user_id %></br>
+
+<%# if can? :update, @city %> 
+<%= link_to "Edit", edit_room_path(@room.id) %>
+<%# end %>
+<%# if can? :destroy, @city %> 
+<%= link_to "destroy", room_path(@room.id), method: :delete, data: {confirm: "Are you sure?"} %>
+<%# end %>
 <%= link_to "lisiting Rooms", rooms_path %>
