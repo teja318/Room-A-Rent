@@ -24,5 +24,9 @@ has_many :amenities, through: :amenity_rooms
   	if self.user.role.name == "guest"
        self.user.update_attributes(role_id:Role.second.id)
   end
-  end     
+  end  
+
+  
+
+
 end

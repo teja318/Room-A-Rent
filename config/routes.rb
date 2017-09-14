@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-
+  get '/rooms/authorize'
   devise_for :users
   resources :bookings
   resources :cities

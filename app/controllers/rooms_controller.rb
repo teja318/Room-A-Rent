@@ -39,11 +39,14 @@ end
     @room.destroy
     redirect_to rooms_path, notice: "successfully destroyed the room"
     end		
-
-
+ def authorize
+ 	@room = Room.all
+ end
 
 private
 def room_params
-params[:room].permit(:name, :description, :price, :rules, :address, :images,  :city_id, amenity_ids:[])
+params[:room].permit(:name, :description, :price, :rules, :address, :images,  :city_id, :is_authorized, amenity_ids:[])
 end	
+
+
 end
