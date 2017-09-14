@@ -27,19 +27,23 @@ end
 	 
 	def update
 	 	@room = Room.find(params[:id])
-	 	if @room.update_attributes(room_params)
+	 	 if @room.update_attributes(room_params)
+	 		
 	redirect_to room_path(@room.id), notice: "successfully updated the room"
 	else
 		render action: "edit"
+    if @room.is_authorized == true
+ 	   Notification.room_confirmation(@room).deliver!
+	    redirect_to room_path(@room.id), notice: "authorized room"
 	end
 	end
-
-    def destroy
+    end
+   def destroy
     @room = Room.find(params[:id])
     @room.destroy
     redirect_to rooms_path, notice: "successfully destroyed the room"
-    end		
- def authorize
+    end
+def authorize
  	@room = Room.all
  end
 
@@ -47,6 +51,8 @@ private
 def room_params
 params[:room].permit(:name, :description, :price, :rules, :address, :images,  :city_id, :is_authorized, amenity_ids:[])
 end	
-
-
 end
+	  
+
+    		
+ 
