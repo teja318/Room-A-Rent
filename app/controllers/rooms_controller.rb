@@ -1,4 +1,5 @@
 class RoomsController < ApplicationController
+  load_and_authorize_resource
 
 def index
 	@rooms = Room.all
@@ -28,15 +29,11 @@ end
 	def update
 	 	@room = Room.find(params[:id])
 	 	 if @room.update_attributes(room_params)
-	 		
-	redirect_to room_path(@room.id), notice: "successfully updated the room"
-	else
-		render action: "edit"
-    if @room.is_authorized == true
- 	   Notification.room_confirmation(@room).deliver!
-	    redirect_to room_path(@room.id), notice: "authorized room"
-	end
-	end
+ 	   		Notification.room_conformation(@room).deliver!	
+			redirect_to room_path(@room.id), notice: "successfully updated the room"
+		else
+			render action: "edit"
+		end
     end
    def destroy
     @room = Room.find(params[:id])
@@ -46,6 +43,12 @@ end
 def authorize
  	@room = Room.all
  end
+
+ def my_rooms
+ 	if current_user.role?("host") == true
+ @room = current_user.rooms
+ end	
+ end	
 
 private
 def room_params

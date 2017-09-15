@@ -1,0 +1,4 @@
+<% @room.each do |ro| %>
+<%= ro.name %>
+<% end %>
+<%= link_to "show", room_path(room.id) %>

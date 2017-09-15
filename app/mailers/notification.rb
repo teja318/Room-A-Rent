@@ -5,9 +5,9 @@ class Notification < ApplicationMailer
   #
   #   en.notification.room_conformation.subject
   #
-  def room_conformation(room)
+  def room_conformation(rooms)
     #@greeting = "Hi"
       @room = rooms
-    mail to: "#{@room.user.email}", subject: "room confirmed - #{@room.order_number}"
+    mail to: "#{@room.user.email}", subject: "room confirmed"
   end
 end

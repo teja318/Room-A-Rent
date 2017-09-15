@@ -1,0 +1,11 @@
+<h2>Listing Bookings </h2>
+
+
+<li><% @bookings.each do |booking| %></li>
+
+
+<%= booking.name %><br>
+<% end %>
+<% if can? :create, Booking.new %>
+<%= link_to 'Bookings', bookings_path %>
+<% end %>

@@ -5,12 +5,13 @@ class Ability
 
     if user.role? "admin"
         can :manage, [City, Amenity, Room]
+        can :authorize, Room
     elsif user.role? "host"
-        can :read, [City, Amenity, Room]
-
+        can [:read,:create], [City, Amenity, Room]
+        can :my_rooms, Room
     elsif user.role? "guest"
-        can :read, [City, Amenity]
-    
+        can :read, [City, Room]
+        can :create, [Room]
     end
     end    
     # Define abilities for the passed in user here. For example:

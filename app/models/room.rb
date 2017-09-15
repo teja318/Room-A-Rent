@@ -1,6 +1,6 @@
 class Room < ActiveRecord::Base
  mount_uploader :images, CoverUploader
-
+has_many :bookings
 belongs_to :user
 belongs_to :city
 has_many :amenity_rooms
@@ -25,8 +25,4 @@ has_many :amenities, through: :amenity_rooms
        self.user.update_attributes(role_id:Role.second.id)
   end
   end  
-
-  
-
-
 end
