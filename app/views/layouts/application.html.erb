@@ -9,7 +9,11 @@
 <body>
  <% if user_signed_in? %>
 	<%= current_user.username %>
-	<%= link_to "Account Settings", edit_user_registration_path %> | 
+  <%= link_to "Cities", cities_path %>
+  <%= link_to "Rooms", rooms_path %>
+  <%= link_to "Amenities", amenities_path %>
+  <%= link_to "Bookings", bookings_path %>
+  <%= link_to "Account Settings", edit_user_registration_path %> | 
 	<%= link_to "Logout", destroy_user_session_path, method: :delete %>
    <% else %>
 	<%= link_to "Login", new_user_session_path %> |

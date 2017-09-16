@@ -1,19 +1,29 @@
 
-<%= @room.name %><br>
-<%= @room.description %><br>
-<%= @room.price%><br>
-<%= @room.rules %><br>
-<%= @room.address %><br>
+Name -<%= @room.name %><br>
+Description -<%= @room.description %><br>
+Price -<%= @room.price%><br>
+Rules -<%= @room.rules %><br>
+Address -<%= @room.address %><br>
 <%= image_tag(@room.images.url) %></br>
-<%= @room.latitude %></br>
-<%= @room.longitude %></br>
-<%= @room.city_id %></br>
-<%= @room.user_id %></br>
+Latitude  -<%= @room.latitude %></br>
+Longitude -<%= @room.longitude %></br>
+City -<%= @room.city.name %></br>
+Username -<%= @room.user.username %></br>
 
-<%# if can? :update, @city %> 
+ 
+<%= form_for @booking do |f| %>
+<%= f.label :start_date %></br>
+<%= f.date_select :start_date %> <br>
+<%= f.label :end_date %></br>
+<%= f.date_select :end_date %> <br>
+<%= f.hidden_field :room_id, value: @room.id %>
+<%= f.submit "Add to bookings" %></br>
+<%end%>
+
+
 <%= link_to "Edit", edit_room_path(@room.id) %>
-<%# end %>
-<%# if can? :destroy, @city %> 
+
 <%= link_to "destroy", room_path(@room.id), method: :delete, data: {confirm: "Are you sure?"} %>
-<%# end %>
+
+
 <%= link_to "lisiting Rooms", rooms_path %>

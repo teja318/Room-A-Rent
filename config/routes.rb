@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'dashboard/bookings'
   get '/rooms/authorize'
   get '/rooms/my_rooms'
 

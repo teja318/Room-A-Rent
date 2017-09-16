@@ -8,6 +8,7 @@ end
 def new
 	@room = Room.new
 end
+
 def create
  @room = Room.new(room_params)
  @room.user_id = current_user.id
@@ -20,6 +21,7 @@ end
 
 def show
 	@room = Room.find(params[:id])
+	@booking = Booking.new
 end
 
     def edit
@@ -29,7 +31,7 @@ end
 	def update
 	 	@room = Room.find(params[:id])
 	 	 if @room.update_attributes(room_params)
- 	   		Notification.room_conformation(@room).deliver!	
+ 	   		#Notification.room_conformation(@room).deliver!	
 			redirect_to room_path(@room.id), notice: "successfully updated the room"
 		else
 			render action: "edit"

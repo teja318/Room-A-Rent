@@ -10,4 +10,13 @@ class Notification < ApplicationMailer
       @room = rooms
     mail to: "#{@room.user.email}", subject: "room confirmed"
   end
+
+  def confirmed(bookings)
+    @booking = bookings
+    mail to: "#{@booking.user.email}", subject: "booking confirmed"
+  end  
+  
+  def not 
+
+
 end

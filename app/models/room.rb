@@ -11,6 +11,7 @@ has_many :amenities, through: :amenity_rooms
 
    after_save :change_role
    before_save :search_lat_long
+   after_create :authorize
     def search_lat_long
   
   	response = HTTParty.get("http://maps.googleapis.com/maps/api/geocode/json?address=#{self.address}")
@@ -24,5 +25,12 @@ has_many :amenities, through: :amenity_rooms
   	if self.user.role.name == "guest"
        self.user.update_attributes(role_id:Role.second.id)
   end
-  end  
+  end 
+
+  def authorize
+   if self.is_authoried == true
+   Notification.room_conformation(self).deliver! 
+
+  end
+  end
 end
