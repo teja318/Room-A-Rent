@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170920073517) do
+ActiveRecord::Schema.define(version: 20170920075345) do
 
   create_table "amenities", force: :cascade do |t|
     t.string   "name"
@@ -64,6 +64,15 @@ ActiveRecord::Schema.define(version: 20170920073517) do
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
     t.boolean  "is_authorized", default: false
+  end
+
+  create_table "special_prices", force: :cascade do |t|
+    t.date     "start_date"
+    t.date     "end_date"
+    t.float    "price"
+    t.integer  "room_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
