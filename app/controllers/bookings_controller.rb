@@ -1,13 +1,16 @@
 class BookingsController < ApplicationController
 
 def index
-@bookings = current_user.bookings
+@bookings = current_user.bookings.where("is_confirmed = ?", true)
 end
 
 def create
 @booking = Booking.new(booking_params)
 @booking.user_id = current_user.id
 if @booking.save
+	#Notification.conformation(@booking).deliver!
+	Notification.not_confirmed(@booking).deliver!
+
 redirect_to bookings_path, notice: "successfully added bookings" 
 end
 end
@@ -24,7 +27,7 @@ end
 def update
 @booking = Booking.find(params[:id])
  if @booking.update_attributes(booking_params)
-		#SNotification.booking_conformation(@booking).deliver!	
+		
 redirect_to booking_path(@booking.id), notice: "successfully updated the booking"
 else
 render action: "edit"
@@ -35,8 +38,13 @@ def destroy
 @booking.destroy
 redirect_to bookings_path, notice: "successfully destroyed the booking"
 end
-def confirmed
-	@booking = current_user.id
+
+# def confirmed
+# @booking = Booking.current_user
+# end
+
+def not_confirmed
+@booking.user_id = current_user.id
 end
 
 private

@@ -6,6 +6,9 @@ class Ability
     if user.role? "admin"
         can :manage, [City, Amenity, Room]
         can :authorize, Room
+        can :my_rooms, Room
+        can :confirmed, Booking
+        can :read, Booking
     elsif user.role? "host"
         can [:read,:create], [City, Amenity, Room]
         can :my_rooms, Room

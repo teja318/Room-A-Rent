@@ -11,12 +11,13 @@ class Notification < ApplicationMailer
     mail to: "#{@room.user.email}", subject: "room confirmed"
   end
 
-  def confirmed(bookings)
+  def conformation(bookings)
     @booking = bookings
     mail to: "#{@booking.user.email}", subject: "booking confirmed"
   end  
   
-  def not 
-
-
+  def not_confirmed(bookings) 
+   @booking = bookings
+   mail to: "#{@booking.user.email}", subject: "booking not_confirmed"
+  end
 end

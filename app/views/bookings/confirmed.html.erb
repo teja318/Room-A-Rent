@@ -1,0 +1,11 @@
+<% @bookings.each do |booking| %>
+<ol>
+<% if booking.is_confirmed == false %>
+<%= booking.user.username %>
+</ol> 
+<%= form_for booking do |f| %>
+<%= f.hidden_field :is_confirmed, value:true %>
+<%= f.submit "confirmed" %>
+<% end %>
+<% end %>
+<% end %>
