@@ -1,0 +1,11 @@
+<h2>Listing SpecialPrices </h2>
+
+
+<li><% @special_prices.each do |special| %></li>
+    <%= special.start_date %><br>
+    <%= special.end_date %><br>
+    <%= special.price %><br>
+    <%= special.room.name %><br>
+    <% end %>
+
+<%= link_to 'Add SpecialPrices', new_special_price_path %>

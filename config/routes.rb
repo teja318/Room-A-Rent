@@ -6,11 +6,15 @@ Rails.application.routes.draw do
   get '/rooms/my_rooms'
 
   devise_for :users
+  
+  resources :reviews
   resources :bookings
   resources :cities
   resources :roles
   resources :amenities
-  resources :rooms
+  resources :rooms do
+    resources :special_prices
+  end
    root 'cities#index'
 
     # The priority is based upon order of creation: first created -> highest priority.

@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  has_many :reviews
   has_many :rooms
   has_many :bookings
 	belongs_to :role

@@ -1,0 +1,14 @@
+<h2> Add SpecialPrice</h2>
+
+<lis><%= form_for @special_price, url: room_special_prices_path, method: :post do |f| %></lis>
+<label>StartDate: </label></br>
+<%= f.date_select :start_date %></br>
+<label>EndDate: </label></br>
+<%= f.date_select :end_date %></br>
+<label>Room </label></br>
+<%= f.hidden_field :room_id, value:@room.id %>
+
+<label>Price: </label></br>
+	<%= f.text_field :price %> </br>
+<%= f.submit %>
+<% end %>

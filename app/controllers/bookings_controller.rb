@@ -49,7 +49,7 @@ end
 
 private
 def booking_params
-params[:booking].permit(:start_date, :end_date, :user_id, :room_id, :is_confirmed)
+params[:booking].permit(:start_date, :end_date, :user_id, :room_id, :price, :is_confirmed)
 end
 
 end

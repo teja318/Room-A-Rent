@@ -1,8 +1,10 @@
 class Room < ActiveRecord::Base
  mount_uploader :images, CoverUploader
+has_many :reviews
 has_many :bookings
 belongs_to :user
 belongs_to :city
+belongs_to :special_price
 has_many :amenity_rooms
 has_many :amenities, through: :amenity_rooms
 
