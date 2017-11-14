@@ -1,0 +1,12 @@
+<h2>Listing Reviews </h2>
+<% @reviews.each do |view| %><br>
+Review - <%= view.review %><br>
+FoodRating - <%= view.food_rating %><br>
+CleanlinessRating - <%= view.cleanliness_rating %><br>
+SafetyRating - <%= view.safety_rating %><br>
+FacilityRating - <%= view.facility_rating %><br>
+LocalityRating -<%= view.locality_rating %><br>
+ Room - <%= view.room.name %><br>
+user - <%= view.user.username %><br>
+<% end %>
+<%= link_to "Add reviews", new_review_path %>

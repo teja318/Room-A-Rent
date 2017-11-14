@@ -4,6 +4,7 @@ class CitiesController < ApplicationController
 
 	def index
 		@cities = City.all
+		@city = City.new
 	end
 
 
@@ -13,11 +14,22 @@ class CitiesController < ApplicationController
 
 	def create
 		@city = City.new(city_params)
-		if @city.save
-			redirect_to cities_path, notice: "successfully added city"
-		else
-	 		render action: "new"
-		end
+		
+	  respond_to do |format|
+      if @city.save
+        format.html { redirect_to cities_path, notice: 'city was successfully created.' }
+        #format.json { render :show, status: :created, location: @city }
+        format.js
+      else
+        #format.html { render :new }
+       # format.json { render json: @comment.errors, status: :unprocessable_entity }
+        format.js
+      end
+      end
+		# 	redirect_to cities_path, notice: "successfully added city"
+		#  else 
+		#  	render action: "new"
+		
  	end
 
 

@@ -8,9 +8,9 @@ def new
 end
 def create
    @special_price = SpecialPrice.new(special_price_params)
-   @special_price.room_id = params[:room.id]
+   @special_price.room_id = params[:room_id]
   if @special_price.save
-    redirect_to special_prices_path, notice: "successfully added special_price"
+    redirect_to rooms_path, notice: "successfully added special_price"
    else
      render action: "new"
   end

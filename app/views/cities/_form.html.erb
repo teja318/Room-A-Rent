@@ -1,0 +1,15 @@
+ 
+
+ <%= form_for(@city, remote: true) do |f| %>
+  
+    <div class="field">
+     <%= f.label :Name %><br>
+	<%= f.text_field :name %> </br>
+	
+    </div>
+    <div class="actions">
+
+    <%= f.submit "Add City", class: "btn btn-primary" %>
+  </div>
+   
+	<% end %>

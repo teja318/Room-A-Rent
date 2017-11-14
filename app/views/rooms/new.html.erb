@@ -1,28 +1,3 @@
-<h2> Add Room </h2>
-<lis><%= form_for @room do |f| %></lis>
-<label>Name: </label></br>
-	<%= f.text_field :name %> </br>
-
-<label>Description: </label></br>
-	<%= f.text_area :description %> </br>
-
-<label>Price: </label></br>
-	<%= f.text_field :price %> </br>
-
-<label>Rules: </label></br>
-	<%= f.text_field :rules %> </br>
-<label>Images: </label></br>
-	<%= f.file_field :images %> </br>
-
-
-<label>Address: </label></br>
-	<%= f.text_area :address %> </br>
-
-<label>City: </label></br>
-	<%= f.collection_select :city_id, City.all, :id, :name, prompt: "select city" %> </br>
-<label>Amenity: </label></br>
-  <%#= f.label :amenity_rooms %>
-  <%= f.collection_check_boxes :amenity_ids, Amenity.all, :id, :name %></br>
-
-<%= f.submit %>
-	<% end %>
+<!-- <h2> Add Room </h2> -->
+<%= render 'form' %>
+<%= link_to 'Back', rooms_path %>

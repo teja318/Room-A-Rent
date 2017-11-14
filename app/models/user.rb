@@ -7,6 +7,12 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :authentication_keys => [:username]
+ validates :mobile , :username , presence: true 
+   validates :mobile , numericality: true   
+
+
+    validates :mobile , :username ,:last_name, :email,:first_name, presence: true 
+   validates :mobile , numericality: true   
 
       before_create :assign_role
       

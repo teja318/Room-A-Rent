@@ -1,26 +1,62 @@
-<h2>Log in</h2>
+  <!-- <h2>Log in</h2>
+
+
+
+ <form>
+ <%#= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <div class="form-group">
+      <label>Username:</label>
+      <input type="text" name="username" class="form-control" f.text_field= "password">
+    </div>
+    <div class="form-group">
+      <label>Password:</label>
+      <input type="password" id="password" name="password" class="form-control" data-toggle="password" f.text_field= "username" >
+    </div>
+    <div class="form-group">
+      <button class="btn btn-success">Log in</button>
+    </div>
+    <%#end%> 
+  </form>
+
+
+<script type="text/javascript">
+  $("#password").password('toggle');
+</script>
+  
+
+<%#= render "devise/shared/links" %> -->
+
+  <h2>Log in</h2>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="field">
     <%= f.label :username %><br />
     <%= f.text_field :username, autofocus: true %>
   </div>
-
+ 
   <div class="field">
-    <%= f.label :password %><br />
+    <%= f.label :password %><br /> 
+   
     <%= f.password_field :password, autocomplete: "off" %>
-  </div>
-
+    <span class="fa fa-eye" ></span>
+  </div> 
   <% if devise_mapping.rememberable? -%>
     <div class="field">
       <%= f.check_box :remember_me %>
       <%= f.label :remember_me %>
     </div>
-  <% end -%>
+  <% end %>
 
   <div class="actions">
     <%= f.submit "Log in" %>
   </div>
 <% end %>
-
+ 
+<script>
+    $('.password').find('.fa-eye').click(function(){
+        $('#password').prop("type", "text");
+    })
+</script>  
 <%= render "devise/shared/links" %>
+
+   

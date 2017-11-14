@@ -1,8 +1,121 @@
-<h2><%= @city.name %></h2>
-<% if can? :update, @city %> 
-<%= link_to "Edit", edit_city_path(@city.id) %>
-<% end %>
-<%if can? :destroy, @city %> 
-<%= link_to "destroy", city_path(@city.id), method: :delete, data: {confirm: "Are you sure?"} %>
-<% end %>
-<%= link_to "lisiting Cities", cities_path %>
+<div class="row">
+  <div class="col-md-7">
+    <div class="page-header">
+      <h2>City - <%= @city.name %>
+       
+        <% if can? :update, @city %>
+          <%= link_to "Edit #{@city.name}", edit_city_path(@city.id), class: "btn btn-info pull-right" %>
+        <% end %>
+         <% if can? :destroy, @city %>
+          <%= link_to "Delete #{@city.name}", city_path(@city.id), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger pull-right" %>
+        <% end %>
+      </h2>     
+    </div>
+    <% if Room.where('city_id=?',@city.id).empty? %>
+      <h4>Sorry no rooms in this city</h4>
+    <% else %>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Image</th>
+            <th>Price</th>
+            <th>Address</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% Room.where('city_id=?',@city.id).each do |room| %> 
+            <tr>
+              <td><%= link_to room.name, room_path(room.id) %></td>
+              <td><%= image_tag(room.images) %></td>
+              <td><%= room.price %></td>
+              <td><%= room.address %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+  </div>
+
+
+
+
+  <div class="col-md-5">
+    <div class="page-header">
+      <h2>Locations</h2>
+    </div>
+    <div id="map_wrapper">
+        <div id="map_canvas" class="mapping"></div>
+    </div>
+    <style>  
+        #map_wrapper {
+          height: 400px;
+      }
+      #map_canvas {
+          width: 100%;
+          height: 100%;
+      }  
+      </style>
+
+  </div>
+</div>
+
+<script>
+  jQuery(function($) {
+    // Asynchronously Load the map API 
+    var script = document.createElement('script');
+    script.src = "//maps.googleapis.com/maps/api/js?sensor=false&callback=initialize";
+    document.body.appendChild(script);
+});
+function initialize() {
+    var map;
+    var bounds = new google.maps.LatLngBounds();
+    var mapOptions = {
+        mapTypeId: 'roadmap'
+    };
+                    
+    // Display a map on the page
+    map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+    map.setTilt(45);
+        
+    // Multiple Markers
+    var markers = [];
+    
+    <% Room.where('city_id=?',@city.id).each do |room| %>
+      markers.push(['<%= room.name %>', <%= room.latitude %>, <%= room.longitude %>])
+    <% end %>
+                        
+    // Info Window Content
+   
+        
+    // Display multiple markers on a map
+    var infoWindow = new google.maps.InfoWindow(), marker, i;
+    
+    // Loop through our array of markers & place each one on the map  
+    for( i = 0; i < markers.length; i++ ) {
+        var position = new google.maps.LatLng(markers[i][1], markers[i][2]);
+        bounds.extend(position);
+        marker = new google.maps.Marker({
+            position: position,
+            map: map,
+            title: markers[i][0]
+        });
+        
+        // Allow each marker to have an info window    
+        google.maps.event.addListener(marker, 'click', (function(marker, i) {
+            return function() {
+                infoWindow.setContent(infoWindowContent[i][0]);
+                infoWindow.open(map, marker);
+            }
+        })(marker, i));
+        // Automatically center the map fitting all markers on the screen
+        map.fitBounds(bounds);
+    }
+    // Override our map zoom level once our fitBounds function runs (Make sure it only runs once)
+    var boundsListener = google.maps.event.addListener((map), 'bounds_changed', function(event) {
+        this.setZoom(5);
+        google.maps.event.removeListener(boundsListener);
+    });
+    
+}
+</script>

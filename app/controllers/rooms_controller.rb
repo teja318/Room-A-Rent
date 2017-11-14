@@ -1,28 +1,30 @@
 class RoomsController < ApplicationController
   load_and_authorize_resource
 
-def index
-	@rooms = Room.where("is_authorized=?", true)
-end
+	def index
+		@rooms = Room.where("is_authorized=?", true)
+	end
 
-def new
-	@room = Room.new
-end
+	def new
+		@room = Room.new
+	end
 
-def create
- @room = Room.new(room_params)
- @room.user_id = current_user.id
- if @room.save
-redirect_to rooms_path, notice: "successfully added room"
- else
- render action: "new"
-end
-end	
+	def create
+	 @room = Room.new(room_params)
+	 @room.user_id = current_user.id
+	 #binding.pry
+	 if @room.save
+	 redirect_to rooms_path, notice: "successfully added room"
+	 else
+	 render action: "new"
+	end
+	end	
 
-def show
-	@room = Room.find(params[:id])
-	@booking = Booking.new
-end
+	 def show
+		@room = Room.find(params[:id])
+		@booking = Booking.new
+		@review = Review.new
+	 end
 
     def edit
 	  @room = Room.find(params[:id])
@@ -37,25 +39,26 @@ end
 			render action: "edit"
 		end
     end
+
    def destroy
     @room = Room.find(params[:id])
     @room.destroy
     redirect_to rooms_path, notice: "successfully destroyed the room"
     end
-def authorize
- 	@room = Room.all
- end
+	def authorize
+	 	@room = Room.where('is_authorized=?',false)
+	 end
 
- def my_rooms
- if current_user.role?("host") == true
- @rooms = current_user.rooms
- end	
- end	
+	 def my_rooms
+	 #if current_user.role?("host") == true
+	 @rooms = current_user.rooms
+	 #end	
+	 end	
 
-private
-def room_params
-params[:room].permit(:name, :description, :price, :rules, :address, :images,  :city_id, :is_authorized, amenity_ids:[])
-end	
+	private
+	def room_params
+	params[:room].permit(:name, :description, :price, :rules, :address, :images,  :city_id, :is_authorized, amenity_ids:[])
+	end	
 end
 	  
 

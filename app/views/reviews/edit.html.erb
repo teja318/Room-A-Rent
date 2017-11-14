@@ -1,0 +1,41 @@
+<h2>  Edit reviews </h2>
+<%= form_for @review do |f| %>
+<label>Review: </label><br>
+<%= f.text_area :review %><br>
+<%= f.label :FoodRating%><br>
+<%= f.radio_button :food_rating, 5 %> 5  
+<%= f.radio_button :food_rating, 4 %> 4  
+<%= f.radio_button :food_rating, 3 %> 3  
+<%= f.radio_button :food_rating, 2 %> 2  
+<%= f.radio_button :food_rating, 1 %> 1 <br> 
+<%= f.label :CleanlinessRating %><br>
+<%= f.radio_button :cleanliness_rating, 5 %> 5
+<%= f.radio_button :cleanliness_rating, 4 %> 4
+<%= f.radio_button :cleanliness_rating, 3 %> 3
+<%= f.radio_button :cleanliness_rating, 2 %> 2
+<%= f.radio_button :cleanliness_rating, 1 %> 1 <br>
+<%= f.label :SafetyRating %><br>
+<%= f.radio_button :safety_rating, 5 %> 5
+<%= f.radio_button :safety_rating, 4 %> 4
+<%= f.radio_button :safety_rating, 3 %> 3
+<%= f.radio_button :safety_rating, 2 %> 2
+<%= f.radio_button :safety_rating, 1 %> 1 <br>
+<%= f.label :FacilityRating %><br>
+<%= f.radio_button :facility_rating, 5%> 5 
+<%= f.radio_button :facility_rating, 4%> 4 
+<%= f.radio_button :facility_rating, 3%> 3
+<%= f.radio_button :facility_rating, 2%> 2
+<%= f.radio_button :facility_rating, 1%> 1<br>
+<%= f.label :LocalityRating %><br>
+<%= f.radio_button :locality_rating, 5 %> 5
+<%= f.radio_button :locality_rating, 4 %> 4
+<%= f.radio_button :locality_rating, 3 %> 3
+<%= f.radio_button :locality_rating, 2 %> 2
+<%= f.radio_button :locality_rating, 1 %> 1<br>
+<!-- <label>Room: </label><br>
+<%#= f.hidden_field :room_id, value:@room.id %><br>
+<label>User: </label><br>
+<%#= f.hidden_field :user_id, value:@user.id %><br> -->
+<%= f.submit %>
+
+<%end %>

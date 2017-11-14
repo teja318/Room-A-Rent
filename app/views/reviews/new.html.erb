@@ -1,0 +1,19 @@
+<%= form_for @review do |f| %>
+<label>Review: </label><br>
+<%= f.text_field :review %><br>
+<label>FoodRating: </label><br>
+<%= f.select :food_rating, (1..5).to_a %><br>
+<label>CleanlinessRating: </label><br>
+<%= f.select :cleanliness_rating, (1..5).to_a %><br>
+<label>SafetyRating: </label><br>
+<%= f.select :safety_rating, (1..5).to_a %><br>
+<label>FacilityRating: </label><br>
+<%= f.select :facility_rating, (1..5).to_a %><br>
+<label>LocalityRating: </label><br>
+<%= f.select :locality_rating, (1..5).to_a %><br>
+<label>Room: </label><br>
+<%= f.hidden_field :room_id, value:@room_id %><br>
+<label>User: </label><br>
+<%#= f.hidden_field :user_id, value:@user.id %><br>
+<%= f.submit %>
+<% end %>

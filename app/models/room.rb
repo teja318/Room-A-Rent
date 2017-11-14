@@ -4,7 +4,7 @@ has_many :reviews
 has_many :bookings
 belongs_to :user
 belongs_to :city
-belongs_to :special_price
+has_many :special_prices, dependent: :destroy
 has_many :amenity_rooms
 has_many :amenities, through: :amenity_rooms
 
@@ -26,7 +26,7 @@ has_many :amenities, through: :amenity_rooms
   def change_role
   	if self.user.role.name == "guest"
        self.user.update_attributes(role_id:Role.second.id)
-  end
+    end
   end 
 
   

@@ -1,54 +1,200 @@
+
 <h2>Sign up</h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+<%= form_for(resource, as: resource_name,remote: true, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
-
-  <div class="field">
+ 
+   <div class="form-group">
    <%= f.label :firt_name %></br>
-   <%= f.text_field :first_name %>
-   </div>
-   
-   <div class="field">
+   <%= f.text_field :first_name,class: "form-control" %>
+   <span id="firstnameError"></span>
+   </div>  
+   <!-- <div class="form-group has-error has-feedback">
+  <label class="control-label" for="firstnameError.innerHTML">Can't be blank</label>
+  <input type="text" class="form-control" id="firstnameError.innerHTML" aria-describedby="firstnameError.innerHTMLStatus">
+  <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+  <span id="firstnameError.innerHTMLStatus" class="sr-only">(error)</span>
+   </div> -->
+
+    <div class="form-group">
    <%= f.label :last_name %></br>
-   <%= f.text_field :last_name%>
+   <%= f.text_field :last_name,class: "form-control"%>
+   <span id="lastnameError"></span>
+   
    </div>
 
 
-   <div class="field">
+   <div class="form-group">
    <%= f.label :username %></br>
-   <%= f.text_field :username %>
+   <%= f.text_field :username,class: "form-control" %>
+   <span id="usernameError"></span>
    </div>
 
-   <div class="field">
+   <div class="form-group">
    <%= f.label :mobile %></br>
-   <%= f.text_field :mobile %>
+   <%= f.text_field :mobile,class: "form-control" %>
+   <span id="mobileError"></span>
    </div>
    
-
-
-
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+  <div class="form-group">
+    <%= f.label :email %></br>
+    <%= f.email_field :email, autofocus: true,class: "form-control" %>
+    <span id="emailError"></span>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :password %>
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>
     <% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
+    <%= f.password_field :password, autocomplete: "off",class: "form-control" %>
+    <span id="passwordError"></span>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+    <%= f.password_field :password_confirmation, autocomplete: "off",class: "form-control" %>
+    <span id="passwordConfirmationError"></span>
   </div>
 
-  <div class="actions">
+  <div class="actions" id="Sign up">
     <%= f.submit "Sign up" %>
+
   </div>
 <% end %>
+
+<script>
+  var alphabetFormatter = /^[A-Za-z]+$/;
+  var emailFormatter = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
+  
+  var mobileFormatter = /^[0-9]+$/;
+  var passwordFormatter = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/;
+
+  var firstnameHandle = document.getElementById('user_first_name');
+  var lastnameHandle = document.getElementById('user_last_name');
+  var usernameHandle = document.getElementById('user_username');
+  var mobileHandle = document.getElementById('user_mobile');
+  var emailHandle = document.getElementById('user_email');
+  var passwordHandle = document.getElementById('user_password');
+  var passwordConfirmationHandle = document.getElementById('user_password_confirmation');
+
+  var firstnameErrorHandle = document.getElementById('firstnameError');
+  var lastnameErrorHandle = document.getElementById('lastnameError');
+  var usernameErrorHandle = document.getElementById('usernameError');
+  var mobileErrorHandle = document.getElementById('mobileError');
+  var emailErrorHandle = document.getElementById('emailError');
+  var passwordErrorHandle = document.getElementById('passwordError');
+  var passwordConfirmationErrorHandle = document.getElementById('passwordConfirmationError');
+
+   validate = {
+
+          "last_name": false,
+          "first_name": false,
+          "username": false,
+          "email": false,
+          "mobile": false,
+          "password": false,
+          "password_confirmation": false
+
+          }
+  
+  
+   signupHandle = document.getElementById('Sign up')
+   signupHandle.addEventListener('click',function(e){
+         if(validate.last_name || validate.first_name || validate.username || validate.email || validate.mobile || validate.password || validate.password_confirmation){
+          return true
+         }else {
+          e.preventDefault();
+        }
+        
+           if(firstnameHandle.value == "") {
+           firstnameErrorHandle.innerHTML = "Can't be blank";
+           validate.firstname = false;
+           
+         } else if(!alphabetFormatter.test(firstnameHandle.value)) {
+           firstnameErrorHandle.innerHTML = "Should only be alphabets";
+           validate.firstname = false;
+         }else{
+          validate.firstname = true;
+       
+
+         }if(lastnameHandle.value == "") {
+          lastnameErrorHandle.innerHTML = "Can't be blank";
+          validate.lastname = false;
+         }else if(!alphabetFormatter.test(lastnameHandle.value)) {
+           lastnameErrorHandle.innerHTML = "Should only be alphabets";
+           validate.lastname = false;
+         }else{
+          validate.lastname = true; 
+
+         }if(usernameHandle.value == "") {
+          usernameErrorHandle.innerHTML = "Can't be blank";
+          validate.username = false;
+         }else if(!alphabetFormatter.test(usernameHandle.value)) {
+           usernameErrorHandle.innerHTML = "Should only be alphabets";
+           validate.username = false;
+         }else{
+          validate.username = true; 
+
+         }if (emailHandle.value== "") {
+           emailErrorHandle.innerHTML = "Cant be blank"; 
+           validate.email = false;
+         }else if (!emailFormatter.test(emailHandle.value)) {
+           emailErrorHandle.innerHTML = "should a valid format";
+           validate.email = false;
+         } else {
+           validate.email = true;
+         
+         } if (mobileHandle.value== "") {
+             mobileErrorHandle.innerHTML = "Cant be blank";
+             validate.mobile = false;
+         }else if (!mobileFormatter.test(mobileHandle.value)){
+            mobileErrorHandle.innerHTML = "should be a number";
+            validate.mobile = false;
+         }else if (mobileHandle.value.length != 10) {
+             mobileErrorHandle.innerHTML = "should be 10 digits";
+             validate.mobile = false;
+         }else{
+            validate.mobile = true;
+        
+
+
+          } if (passwordHandle.value== "") {
+          passwordErrorHandle.innerHTML = "Cant be blank";
+           validate.password = false;
+         }else if (!passwordFormatter.test(passwordHandle.value)) {
+          passwordErrorHandle.innerHTML = "Ensure you have 1 upper case, 1 lower case and 1 number";
+           validate.password = false;
+         }else if (passwordHandle.value.length < 6) {
+         passwordErrorHandle.innerHTML = "should be 6 digits";
+           validate.password = false;
+         }else {
+         validate.password = true;
+         }
+ 
+
+          passwordHandle.addEventListener('mouseover', function(){
+            passwordHandle.type = "text"
+          }, false)
+
+          passwordHandle.addEventListener('mouseout', function(){
+            passwordHandle.type = "password"
+          }, false)
+
+  
+         if (passwordConfirmationHandle.value== "") {
+         passwordConfirmationErrorHandle.innerHTML = "Cant be blank";
+         validate.password_confirmation = false;
+         }else if (passwordHandle.value !== passwordConfirmationHandle.value) {
+         passwordConfirmationErrorHandle.innerHTML = "password doesn't match";
+         validate.password_confirmation = false;
+         } else {
+         validate.password_confirmation = true;
+         }
+
+
+   },false);
+  
+</script>
 
 <%= render "devise/shared/links" %>

@@ -1,9 +1,31 @@
-<h2>Listing Cities </h2>
-<li><% @cities.each do |city| %></li>
+<div class= "row">
+	<div class= "col-md-8">
+		<div class="page-header">
+			<h2>Listing Cities </h2>
+		</div>
+		<div id="cityList" >
+		<ol>
+			<% @cities.each do |city| %></br>
+			<%= city.name %>
+			<%= link_to "show", city %></br>
+			<% end %>
+		</ol>
+		</div>
+	</div>
+
+	<div class="col-md-4">
+
+    <div class="page-header">
+    <h2>New City</h2>
+    </div>
+
+	<% if can? :create, @city%>
+	 <div id="errorMsg"></div>
+	<%= render "form" %>
+	<%end%>
+    
+	</div>
+
+</div>
 
 
-<%= city.name %><br>
-<% end %>
-<% if can? :create, City.new %>
-<%= link_to 'New Cities', new_city_path %>
-<% end %>

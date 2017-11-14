@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   
-  get '/bookings/confirmed'
+  #get '/bookings/confirmed'
   get 'dashboard/bookings'
+  get 'dashboard/user'
   get '/rooms/authorize'
   get '/rooms/my_rooms'
 

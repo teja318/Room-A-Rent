@@ -1,4 +1,6 @@
+
 <% @rooms.each do |ro| %></br>
+ 
 <%= ro.name %>
 <%= link_to "show", room_path(ro.id) %>
 <% end %>

@@ -1,5 +1,5 @@
 <%if @room.user_id == current_user.id %>
-<%= link_to "Specialprice", new_room_special_price_path(@room.id) %><br>
+Specialprice: <%= link_to "Specialprice", new_room_special_price_path(@room.id) %><br>
 <% end %>
 Name -<%= @room.name %><br>
 Description -<%= @room.description %><br>
@@ -12,16 +12,65 @@ Longitude -<%= @room.longitude %></br>
 City -<%= @room.city.name %></br>
 Username -<%= @room.user.username %></br>
 
- 
-<%= form_for @booking do |f| %>
-<%= f.label :start_date %></br>
-<%= f.date_select :start_date %> <br>
-<%= f.label :end_date %></br>
-<%= f.date_select :end_date %> <br>
-<%= f.hidden_field :room_id, value: @room.id %>
-<%= f.submit "Add to bookings" %></br>
+<h3>Listing Reviews</h3>
+<% @room.reviews.each do |view| %>
+Review - <%= view.review %></br>
+FoodRating - <%= view.food_rating%></br>
+CleanlinessRating -<%= view.cleanliness_rating %></br>
+SafetyRating - <%= view.safety_rating %></br>
+FacilityRating - <%= view.facility_rating %></br>
+LocalityRating - <%= view.locality_rating %></br>
+<% if user_id = current_user.id %>
+<%= link_to "edit", edit_review_path(view) %>
+<%= link_to "destroy", view, method: :delete, data: {confirm: "Are you sure?"} %>
+<% end %>
 <%end%>
 
+
+<%= form_for @review do |f| %>
+<h5> 5 – Excellent, 4 – Good, 3 – Average, 2 – Fair, 1- Poor</h5>
+
+<%= f.label :Review %><br>
+<%= f.text_area :review , placeholder: "min 150 characters long"%><br>
+<%= f.label :FoodRating%><br>
+<%= f.radio_button :food_rating, 5 %> 5  
+<%= f.radio_button :food_rating, 4 %> 4  
+<%= f.radio_button :food_rating, 3 %> 3  
+<%= f.radio_button :food_rating, 2 %> 2  
+<%= f.radio_button :food_rating, 1 %> 1 <br> 
+<%= f.label :CleanlinessRating %><br>
+<%= f.radio_button :cleanliness_rating, 5 %> 5
+<%= f.radio_button :cleanliness_rating, 4 %> 4
+<%= f.radio_button :cleanliness_rating, 3 %> 3
+<%= f.radio_button :cleanliness_rating, 2 %> 2
+<%= f.radio_button :cleanliness_rating, 1 %> 1 <br>
+<%= f.label :SafetyRating %><br>
+<%= f.radio_button :safety_rating, 5 %> 5
+<%= f.radio_button :safety_rating, 4 %> 4
+<%= f.radio_button :safety_rating, 3 %> 3
+<%= f.radio_button :safety_rating, 2 %> 2
+<%= f.radio_button :safety_rating, 1 %> 1 <br>
+<%= f.label :FacilityRating %><br>
+<%= f.radio_button :facility_rating, 5%> 5 
+<%= f.radio_button :facility_rating, 4%> 4 
+<%= f.radio_button :facility_rating, 3%> 3
+<%= f.radio_button :facility_rating, 2%> 2
+<%= f.radio_button :facility_rating, 1%> 1<br>
+<%= f.label :LocalityRating %><br>
+<%= f.radio_button :locality_rating, 5 %> 5
+<%= f.radio_button :locality_rating, 4 %> 4
+<%= f.radio_button :locality_rating, 3 %> 3
+<%= f.radio_button :locality_rating, 2 %> 2
+<%= f.radio_button :locality_rating, 1 %> 1<br>
+<%= f.label :Room %><br>
+<%= f.hidden_field :room_id, value: @room.id %><br>
+<%#= f.label :User %><br>
+<%#= f.hidden_field :user_id, value:@user.id %><br>
+<%= f.submit "Add reviews" %></br>
+<% end %></br>
+
+<h2>Add Bookings</h2>
+ <%= render "./bookings/form" %>
 
 <%= link_to "Edit", edit_room_path(@room.id) %>
 
@@ -29,3 +78,4 @@ Username -<%= @room.user.username %></br>
 
 
 <%= link_to "lisiting Rooms", rooms_path %>
+ 

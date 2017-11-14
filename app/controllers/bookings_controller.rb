@@ -6,12 +6,17 @@ end
 
 def create
 @booking = Booking.new(booking_params)
+#binding.pry
 @booking.user_id = current_user.id
+#binding.pry
 if @booking.save
-	#Notification.conformation(@booking).deliver!
+	
 	Notification.not_confirmed(@booking).deliver!
+	
 
 redirect_to bookings_path, notice: "successfully added bookings" 
+# else
+# 	redirect_to rooms_path
 end
 end
 
@@ -27,7 +32,7 @@ end
 def update
 @booking = Booking.find(params[:id])
  if @booking.update_attributes(booking_params)
-		
+ Notification.conformation(@booking).deliver!
 redirect_to booking_path(@booking.id), notice: "successfully updated the booking"
 else
 render action: "edit"
@@ -39,13 +44,7 @@ def destroy
 redirect_to bookings_path, notice: "successfully destroyed the booking"
 end
 
-# def confirmed
-# @booking = Booking.current_user
-# end
 
-def not_confirmed
-@booking.user_id = current_user.id
-end
 
 private
 def booking_params
