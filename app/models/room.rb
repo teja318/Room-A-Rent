@@ -13,7 +13,7 @@ has_many :amenities, through: :amenity_rooms
 
    after_save :change_role
    before_save :search_lat_long
-   
+   #before_update :search_lat_long
     def search_lat_long
   
   	response = HTTParty.get("http://maps.googleapis.com/maps/api/geocode/json?address=#{self.address}")

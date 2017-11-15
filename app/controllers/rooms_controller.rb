@@ -34,7 +34,7 @@ class RoomsController < ApplicationController
 	 	@room = Room.find(params[:id])
 	 	 if @room.update_attributes(room_params)
  	   		Notification.room_conformation(@room).deliver!	
-			redirect_to room_path(@room.id), notice: "successfully updated the room"
+			redirect_to room_path(@room.id), notice: "showuccessfully updated the room"
 		else
 			render action: "edit"
 		end
@@ -50,14 +50,14 @@ class RoomsController < ApplicationController
 	 end
 
 	 def my_rooms
-	 #if current_user.role?("host") == true
+	
 	 @rooms = current_user.rooms
-	 #end	
+		
 	 end	
 
 	private
 	def room_params
-	params[:room].permit(:name, :description, :price, :rules, :address, :images,  :city_id, :is_authorized, amenity_ids:[])
+	params[:room].permit(:name, :description, :price, :rules, :address, :images,  :city_id, :latitude, :longitude, :is_authorized, amenity_ids:[])
 	end	
 end
 	  

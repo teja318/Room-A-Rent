@@ -4,10 +4,10 @@
       <h2>City - <%= @city.name %>
        
         <% if can? :update, @city %>
-          <%= link_to "Edit #{@city.name}", edit_city_path(@city.id), class: "btn btn-info pull-right" %>
+          <%= link_to "Edit ", edit_city_path(@city.id), class: "btn btn-info pull-right" %>
         <% end %>
          <% if can? :destroy, @city %>
-          <%= link_to "Delete #{@city.name}", city_path(@city.id), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger pull-right" %>
+          <%= link_to "Delete ", city_path(@city.id), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger pull-right" %>
         <% end %>
       </h2>     
     </div>
@@ -59,14 +59,14 @@
 
   </div>
 </div>
-
-<script>
-  jQuery(function($) {
+<script >
+jQuery(function($) {
     // Asynchronously Load the map API 
     var script = document.createElement('script');
     script.src = "//maps.googleapis.com/maps/api/js?sensor=false&callback=initialize";
     document.body.appendChild(script);
 });
+
 function initialize() {
     var map;
     var bounds = new google.maps.LatLngBounds();
@@ -80,15 +80,11 @@ function initialize() {
         
     // Multiple Markers
     var markers = [];
-    
-    <% Room.where('city_id=?',@city.id).each do |room| %>
+     <% Room.where('city_id=?',@city.id).each do |room| %>
       markers.push(['<%= room.name %>', <%= room.latitude %>, <%= room.longitude %>])
     <% end %>
-                        
-    // Info Window Content
-   
-        
-    // Display multiple markers on a map
+      
+   // Display multiple markers on a map
     var infoWindow = new google.maps.InfoWindow(), marker, i;
     
     // Loop through our array of markers & place each one on the map  
@@ -108,12 +104,14 @@ function initialize() {
                 infoWindow.open(map, marker);
             }
         })(marker, i));
+
         // Automatically center the map fitting all markers on the screen
         map.fitBounds(bounds);
     }
+
     // Override our map zoom level once our fitBounds function runs (Make sure it only runs once)
     var boundsListener = google.maps.event.addListener((map), 'bounds_changed', function(event) {
-        this.setZoom(5);
+        this.setZoom(14);
         google.maps.event.removeListener(boundsListener);
     });
     

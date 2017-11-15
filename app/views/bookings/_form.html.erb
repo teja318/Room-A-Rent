@@ -1,10 +1,10 @@
 <%= form_for @booking do |f| %>
-<%= f.label :start_date %></br>
-<%= f.text_field :start_date %> <br>
-<%= f.label :end_date %></br>
+<%= f.label :start_date %>
+<%= f.text_field :start_date %>
+<%= f.label :end_date %>
 <%= f.text_field :end_date %> <br>
 <%= f.hidden_field :room_id, value: @room.id %>
-<%= f.submit "Add to bookings" %></br>
+<%= f.submit "Add to bookings" %>
 <%end%>
 
 <script>
